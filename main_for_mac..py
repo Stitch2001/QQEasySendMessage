@@ -5,16 +5,16 @@ import pymouse, pykeyboard, pyperclip
 
 # 创建用户窗口
 mainForm = tk.Tk()
-mainForm.title('自动群发')
+mainForm.title('自动群发系统')
 mainForm.resizable(0, 0)
 
 # 输入框，用于输入要群发的用户名
 nameText = tk.Text(mainForm, height=40, width=40)
-nameText.insert(0.0, "消息的名单")
+nameText.insert(0.0, "在此处键入需要群发消息的名单")
 nameText.grid(row=0, padx=5, pady=5)
 
 msgText = tk.Text(mainForm, height=2, width=40)
-msgText.insert(0.0, "内容")
+msgText.insert(0.0, "在此处键入群发的内容哦哦哦")
 msgText.grid(row=1, padx=5, pady=5)
 
 mouseSearchXY = (-1, -1)
@@ -44,15 +44,15 @@ def onClickStartButton():
         return
     # 判断输入框有没有内容
     nameContent = nameText.get(0.0, tk.END).rstrip()
-    if nameContent == '消息的名单' or nameContent == '':
-        msg.showerror('错误', '请先输入名单')
+    if nameContent == '在此处键入需要群发消息的名单' or nameContent == '':
+        msg.showerror('错误', '请先输入名单哦哦哦')
         return
     msgContent = msgText.get(0.0, tk.END).rstrip()
-    if msgContent == '内容' or msgContent == '':
-        msg.showerror('错误', '请先输入内容')
+    if msgContent == '在此处键入群发的内容哦哦哦' or msgContent == '':
+        msg.showerror('错误', '请先输入群发的内容哦哦哦')
         return
     # 开始群发
-    if not msg.askokcancel('提示', '即将开始，在完成之前别动鼠标'):
+    if not msg.askokcancel('提示', '开始干活喽，在我说完成之前别动鼠标哦'):
         return
     m = pymouse.PyMouse()  # 获取鼠标对象
     k = pykeyboard.PyKeyboard()  # 获取键盘对象
@@ -62,7 +62,7 @@ def onClickStartButton():
         pyperclip.copy(i)
         k.press_key('Command')
         k.tap_key('v')
-        k.release_key('Command')#Mac Os 的函数有点区别 k.press_keys(['Command','shift','3'])
+        k.press_key('Command')
         time.sleep(0.5)
         k.tap_key('Return')
         time.sleep(0.5)
@@ -70,11 +70,11 @@ def onClickStartButton():
         pyperclip.copy(msgContent)
         k.press_key('Command')
         k.tap_key('v')
-        k.release_key('Command')
+        k.press_key('Command')
         time.sleep(0.5)
         k.tap_key('Return')
         time.sleep(0.5)
-    msg.showinfo('提示', '完成！')
+    msg.showinfo('提示', '任务成功完成！')
 
 
 startButton = ttk.Button(mainForm, text='启动', width=40, command=onClickStartButton)
